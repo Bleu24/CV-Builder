@@ -1,8 +1,10 @@
+import '../styles/Controls.css';
+
 export default function Controls({
-  fullName,
-  degree,
   handleFullNameChange,
   handleDegreeChange,
+  handleAddressChange,
+  handleEmailChange
 }) {
   return (
     <div className="controls">
@@ -12,7 +14,6 @@ export default function Controls({
           Full name:{" "}
           <input
             onChange={handleFullNameChange}
-            value={fullName}
             type="text"
             id="first-name"
             name="first-name"
@@ -22,10 +23,27 @@ export default function Controls({
           Degree:{" "}
           <input
             onChange={handleDegreeChange}
-            value={degree}
             type="text"
             id="degree"
             name="degree"
+          />
+        </label>
+        <label>
+          Address:{" "}
+          <input
+            onChange={handleAddressChange}
+            type="text"
+            id="address"
+            name="address"
+          />
+        </label>
+        <label>
+          Email:{" "}
+          <input
+            onChange={handleEmailChange}
+            type="email"
+            id="email"
+            name="email"
           />
         </label>
       </form>
