@@ -6,10 +6,10 @@ import { useState } from "react";
 function App() {
   const initialInfo = {
     fullName: "",
-    telNo: "09275483895",
-    degree: "Bachelor of Science in Computer Science",
-    address: "Bacoor City, Cavite",
-    email: "bryanreamillo2403@gmail.com",
+    telNo: "",
+    degree: "",
+    address: "",
+    email: "",
   };
 
   const [info, setInfo] = useState(initialInfo);
@@ -18,14 +18,18 @@ function App() {
     setInfo({ ...info, fullName: e.target.value });
   const handleDegreeChange = (e) =>
     setInfo({ ...info, degree: e.target.value });
+  const handleAddressChange = (e) =>
+    setInfo({...info, address: e.target.value });
+  const handleEmailChange = (e) =>
+    setInfo({ ...info, email: e.target.value });
 
   return (
     <>
       <Controls
-        // fullName={info.fullName}
-        // degree={info.degree}
         handleFullNameChange={handleFullNameChange}
         handleDegreeChange={handleDegreeChange}
+        handleAddressChange={handleAddressChange}
+        handleEmailChange={handleEmailChange}
       />
       <Page info={info} />
     </>
