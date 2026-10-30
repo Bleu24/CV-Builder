@@ -1,12 +1,63 @@
 import { useState } from 'react';
 import '../styles/EducationControl.css';
 
+function EducationItem({ id }) {
+    const [awards, setAwards] = useState([]);
+
+    const handleAddAwards = (e) => {
+        e.preventDefault();
+        setAwards([...awards, crypto.randomUUID()]);
+    }
+
+    return (
+        <div key={id}>
+            <label htmlFor={`schoolName-${id}`}>
+                School Name: {" "}
+                <input type="text" name={`schoolName-${id}`} id={`schoolName-${id}`} />
+            </label>
+            <label htmlFor={`highestAchievement-${id}`}>
+                Highest Education: {" "}
+                <input type="text" name={`highestAchievement-${id}`} id={`highestAchievement-${id}`} />
+            </label>
+       
+            <div className="date-picker">
+                <label htmlFor={`startDate-${id}`}>
+                    Start Date: {" "}
+                    <input type="date" name={`startDate-${id}`} id={`startDate-${id}`} />
+                </label>
+                <label htmlFor={`endDate-${id}`}>
+                    End Date: {" "}
+                    <input type="date" name={`endDate-${id}`} id={`endDate-${id}`} />
+                </label>
+            </div>
+
+            <div className="awards">
+                <div className="awards__header">
+                    <h3 className='awards__heading'>Awards</h3>
+                    <button onClick={handleAddAwards}>Add Award</button>
+                </div>
+
+                {
+                    awards.map((award, idx) => (
+                        <label key={award}>
+                            {`Award ${idx + 1}: `}
+                            <input type="text" name={`award-${award}`} id={`award-${award}`} />
+                        </label>
+                    ))
+                }
+
+            </div>
+        </div>
+    );
+}
+
 function EducationComponent() {
 
     const [educationItems, setEducationItems] = useState([]);
 
-    const handleAddEducationItem = () => {
-        setEducationItems([...educationItems, crypto.randomUUID()])
+    const handleAddEducationItem = (e) => {
+        e.preventDefault();
+        setEducationItems([...educationItems, crypto.randomUUID()]);
     }
 
     return (
@@ -16,22 +67,7 @@ function EducationComponent() {
                 <button onClick={handleAddEducationItem}>Add Item</button>
             </div>
 
-            {
-                educationItems.map(eI => (
-                    <div key={eI}>
-                        <label htmlFor={`schoolName-${eI}`}>
-                            School Name: {" "}
-                            <input type="text" name={`schoolName-${eI}`} id={`schoolName-${eI}`} />
-                        </label>
-                        <label htmlFor={`highestAchievement-${eI}`}>
-                            Highest Education: {" "}
-                            <input type="text" name={`highestAchievement-${eI}`} id={`highestAchievement-${eI}`} />
-                        </label>
-                        {/* TODO: add date picker */}
-                    </div>
-
-                ))
-            }
+            {educationItems.map(eI => <EducationItem id={eI} key={eI}/>)}
 
         </div>
     );
