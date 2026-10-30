@@ -1,4 +1,5 @@
 import '../styles/Controls.css';
+import EducationComponent from './EducationControl';
 
 export default function Controls({
   handleFullNameChange,
@@ -6,6 +7,8 @@ export default function Controls({
   handleAddressChange,
   handleEmailChange
 }) {
+  // TODO: Add new control for education and pro exp
+  
   return (
     <div className="controls">
       <h1>Controls</h1>
@@ -46,6 +49,8 @@ export default function Controls({
             name="email"
           />
         </label>
+
+        <EducationComponent/>
       </form>
     </div>
   );
