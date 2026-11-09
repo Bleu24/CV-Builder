@@ -1,14 +1,25 @@
 import '../styles/Controls.css';
 import EducationComponent from './EducationControl';
+import ProfessionalComponent from './ProfessionalControl';
 
 export default function Controls({
-  handleFullNameChange,
-  handleDegreeChange,
-  handleAddressChange,
-  handleEmailChange
+  headerProps,
+  educationProps
 }) {
   // TODO: Add new control for education and pro exp
-  
+  const { handleFullNameChange, handleDegreeChange, handleAddressChange, handleEmailChange } = headerProps;
+  const { 
+    handleAddEducationItem, 
+    educationItems, 
+    handleAddAwards, 
+    handleSchoolChange, 
+    handleAchievementChange, 
+    handleStartDateChange, 
+    handleEndDateChange, 
+    handleAwardChange 
+  } = educationProps;
+
+
   return (
     <div className="controls">
       <h1>Controls</h1>
@@ -50,7 +61,18 @@ export default function Controls({
           />
         </label>
 
-        <EducationComponent/>
+        <EducationComponent
+          onClick={handleAddEducationItem}
+          educationItems={educationItems}
+          onAddAwardClick={handleAddAwards}
+          handleSchoolChange={handleSchoolChange}
+          handleAchievementChange={handleAchievementChange}
+          handleStartDateChange={handleStartDateChange}
+          handleEndDateChange={handleEndDateChange}
+          handleAwardChange={handleAwardChange}
+        />
+
+        <ProfessionalComponent />
       </form>
     </div>
   );
