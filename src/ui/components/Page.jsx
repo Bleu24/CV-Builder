@@ -18,7 +18,7 @@ export default function Page({info, sections}) {
                     <SectionItem
                       educationalAchievement ={school.highestAchievement}
                       category={section.category.toLowerCase()}
-                      key={school.schoolName}
+                      key={school.id}
                       orgName={school.schoolName}
                       date={school.date}
                       accomplishments={school.awards}
