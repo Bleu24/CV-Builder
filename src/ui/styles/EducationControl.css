@@ -1,0 +1,23 @@
+.education-controls div {
+    display: flex;
+    flex-direction: column;
+}
+
+.education-controls div:nth-child(1),
+.education-controls div.date-picker {
+    display: flex;
+    flex-direction: row;
+}
+
+.education-controls div:nth-child(1) {
+    margin-top: 1rem;  
+}
+
+.education-controls div.date-picker {
+    gap: 1rem
+}
+
+.education-controls .awards__header {
+    display: flex;
+    flex-direction: row;
+}
