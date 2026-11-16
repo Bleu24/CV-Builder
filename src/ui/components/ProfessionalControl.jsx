@@ -1,22 +1,17 @@
 import { useState } from "react";
 // import "../styles/ProfessionalControl.css";
 
-function ProfessionalItem({ id }) {
-	const [accomplishments, setAccomplishments] = useState([]);
-
-	const handleAddAccomplishment = (e) => {
-		e.preventDefault();
-		setAccomplishments([...accomplishments, crypto.randomUUID()]);
-	};
+function ProfessionalItem({ id, accomplishments, handleOrgChange }) {
 
 	return (
-		<div key={id}>
+		<div key={id} className="professionalItem" id={id}>
 			<label htmlFor={`organizationName-${id}`}>
 				Organization Name: {" "}
 				<input
 					type="text"
 					name={`organizationName-${id}`}
 					id={`organizationName-${id}`}
+					onChange={handleOrgChange}
 				/>
 			</label>
 
@@ -51,10 +46,10 @@ function ProfessionalItem({ id }) {
 			<div className="accomplishments">
 				<div className="accomplishments__header">
 					<h3 className="accomplishments__heading">Accomplishments</h3>
-					<button onClick={handleAddAccomplishment}>Add Accomplishment</button>
+					<button onClick={""}>Add Accomplishment</button>
 				</div>
 
-				{accomplishments.map((accomplishment, index) => (
+				{accomplishments?.map((accomplishment, index) => (
 					<label key={accomplishment} htmlFor={`accomplishment-${accomplishment}`}>
 						{`Accomplishment ${index + 1}: `}
 						<input
@@ -69,23 +64,17 @@ function ProfessionalItem({ id }) {
 	);
 }
 
-function ProfessionalComponent() {
-	const [professionalItems, setProfessionalItems] = useState([]);
-
-	const handleAddProfessionalItem = (e) => {
-		e.preventDefault();
-		setProfessionalItems([...professionalItems, crypto.randomUUID()]);
-	};
+function ProfessionalComponent({onClick, professionalItems, handleOrgChange}) {
 
 	return (
 		<div className="professional-controls">
 			<div>
 				<h2>Professional Experience</h2>
-				<button onClick={handleAddProfessionalItem}>Add Item</button>
+				<button onClick={onClick}>Add Item</button>
 			</div>
 
 			{professionalItems.map((item) => (
-				<ProfessionalItem id={item} key={item} />
+				<ProfessionalItem id={item.id} key={item.id} handleOrgChange={handleOrgChange} />
 			))}
 		</div>
 	);
