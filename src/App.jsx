@@ -5,18 +5,6 @@ import { School } from "./classes/School";
 import { useState } from "react";
 import { Organization } from "./classes/Organization";
 
-
-const getAllAwards = (schools) => {
-  const awards = [];
-  for (const school of schools) {
-    for (const award of school.awards) {
-      awards.push(award);
-    }
-  }
-
-  return awards;
-}
-
 function App() {
   const initialInfo = {
     fullName: "",
@@ -35,31 +23,7 @@ function App() {
     {
       id: crypto.randomUUID(),
       category: "Professional Experience",
-      orgs: [
-        {
-          organizationName: "NCNA",
-          address: {
-            city: "Daly City",
-            state: "California",
-            country: "United States of America",
-          },
-          date: {
-            startDate: "Oct 2024",
-            endDate: "Apr 2025"
-          },
-          role: "Quality Assurance Tester",
-          accomplishments: [
-            {
-              id: crypto.randomUUID(),
-              text: "Tested multiple features of the company portal (e.g., admin controls) to ensure functionality, responsiveness, and overall system reliability.",
-            },
-            {
-              id: crypto.randomUUID(),
-              text: "Ensured consistency and accuracy of data between sandbox and live environments, minimizing discrepancies and deployment risks",
-            },
-          ],
-        }
-      ],
+      orgs: [],
     },
   ];
 
@@ -208,10 +172,28 @@ function App() {
       if (section.category === "Professional Experience") {
         return {
           ...section,
-          accomplishments: [...section.accomplishments, new Organization()]
+          orgs: [...section.orgs, new Organization()]
         }
       } else return section;
     });
+
+    console.log(professionalSection);
+    setSections(nextSections);
+  }
+
+   const handleOrgChange = (e) => {
+    const parentDiv = e.target.closest(".professionalItem");
+    const nextSections = sections.map(section => {
+      if (section.category === "Professional Experience") {
+        const nextOrgs = section.orgs.map(org => {
+          if (org.id === parentDiv.id) {
+            return { ...org, organizationName: e.target.value };
+          } else return org;
+        });
+
+        return { ...section, orgs: [...nextOrgs] };
+      } else return section;
+    })
 
     setSections(nextSections);
   }
@@ -230,6 +212,12 @@ function App() {
             handleStartDateChange, 
             handleEndDateChange,
             handleAwardChange 
+          }}
+          professionalProps=
+          {{
+            handleOrganizationItem,
+            professionalItems: professionalSection.orgs,
+            handleOrgChange
           }}
       />
       <Page info={info} sections={sections} />
