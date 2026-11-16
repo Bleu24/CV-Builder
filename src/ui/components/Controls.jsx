@@ -4,7 +4,8 @@ import ProfessionalComponent from './ProfessionalControl';
 
 export default function Controls({
   headerProps,
-  educationProps
+  educationProps,
+  professionalProps
 }) {
   // TODO: Add new control for education and pro exp
   const { handleFullNameChange, handleDegreeChange, handleAddressChange, handleEmailChange } = headerProps;
@@ -18,6 +19,11 @@ export default function Controls({
     handleEndDateChange, 
     handleAwardChange 
   } = educationProps;
+  const {
+    handleOrganizationItem,
+    professionalItems,
+    handleOrgChange
+  } = professionalProps;
 
 
   return (
@@ -72,7 +78,11 @@ export default function Controls({
           handleAwardChange={handleAwardChange}
         />
 
-        <ProfessionalComponent />
+        <ProfessionalComponent 
+          onClick={handleOrganizationItem}
+          professionalItems={professionalItems}
+          handleOrgChange={handleOrgChange}
+        />
       </form>
     </div>
   );
