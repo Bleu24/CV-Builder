@@ -108,7 +108,7 @@ function App() {
   }
 
   const handleStartDateChange = (e) => {
-    const parentDiv = e.target.closest(".educationItem");
+    const parentDiv = e.target.closest(".educationItem") || e.target.closest(".professionalItem");
     const nextSections = sections.map(section => {
       if (section.category === "Education") {
         const nextSchools = section.schools.map(school => {
@@ -118,14 +118,23 @@ function App() {
         });
 
         return { ...section, schools: [...nextSchools] };
+
+      } else if (section.category === "Professional Experience") {
+        const nextOrgs = section.orgs.map(org => {
+          if (org.id === parentDiv.id) {
+            return { ...org, date: { ...org.date, startDate: e.target.value } };
+          } else return org;
+        });
+
+        return { ...section, orgs: [...nextOrgs] }
       } else return section;
-    })
+    });
 
     setSections(nextSections);
   }
 
   const handleEndDateChange = (e) => {
-    const parentDiv = e.target.closest(".educationItem");
+    const parentDiv = e.target.closest(".educationItem") || e.target.closest(".professionalItem");
     const nextSections = sections.map(section => {
       if (section.category === "Education") {
         const nextSchools = section.schools.map(school => {
@@ -135,8 +144,17 @@ function App() {
         });
 
         return { ...section, schools: [...nextSchools] };
+
+      } else if (section.category === "Professional Experience") {
+        const nextOrgs = section.orgs.map(org => {
+          if (org.id === parentDiv.id) {
+            return { ...org, date: { ...org.date, endDate: e.target.value } };
+          } else return org;
+        });
+
+        return { ...section, orgs: [...nextOrgs] }
       } else return section;
-    })
+    });
 
     setSections(nextSections);
   }
@@ -181,7 +199,7 @@ function App() {
     setSections(nextSections);
   }
 
-   const handleOrgChange = (e) => {
+  const handleOrgChange = (e) => {
     const parentDiv = e.target.closest(".professionalItem");
     const nextSections = sections.map(section => {
       if (section.category === "Professional Experience") {
@@ -198,27 +216,74 @@ function App() {
     setSections(nextSections);
   }
 
+  const handleProfAddressChange = (e) => {
+    const parentDiv = e.target.closest(".professionalItem");
+    const input = e.target.name;
+    const nextSections = sections.map(section => {
+      if (section.category === "Professional Experience") {
+        const nextOrgs = section.orgs.map(org => {
+          if (org.id === parentDiv.id) {
+            switch (input) {
+              case "city":
+                return { ...org, address: { ...org.address, city: e.target.value } };
+              case "state":
+                return { ...org, address: { ...org.address, state: e.target.value } };
+              case "country":
+                return { ...org, address: { ...org.address, country: e.target.value } };
+              default:
+                break;
+            }
+          } else return org;
+        });
+
+        return { ...section, orgs: [...nextOrgs] };
+      } else return section;
+    })
+
+    setSections(nextSections);
+
+  }
+
+  const handleRoleChange = (e) => {
+    const parentDiv = e.target.closest(".professionalItem");
+    const nextSections = sections.map(section => {
+      if (section.category === "Professional Experience") {
+        const nextOrgs = section.orgs.map(org => {
+          if (org.id === parentDiv.id) {
+            return { ...org, role: e.target.value };
+          } else return org;
+        });
+
+        return { ...section, orgs: [...nextOrgs] };
+      } else return section;
+    })
+
+    setSections(nextSections);
+  }
+
   return (
     <>
       <Controls
         headerProps={{ handleFullNameChange, handleDegreeChange, handleAddressChange, handleEmailChange }}
         educationProps=
-          {{ 
-            handleAddEducationItem,
-            educationItems: educationSection.schools,
-            handleAddAwards, 
-            handleSchoolChange, 
-            handleAchievementChange, 
-            handleStartDateChange, 
-            handleEndDateChange,
-            handleAwardChange 
-          }}
-          professionalProps=
-          {{
-            handleOrganizationItem,
-            professionalItems: professionalSection.orgs,
-            handleOrgChange
-          }}
+        {{
+          handleAddEducationItem,
+          educationItems: educationSection.schools,
+          handleAddAwards,
+          handleSchoolChange,
+          handleAchievementChange,
+          handleStartDateChange,
+          handleEndDateChange,
+          handleAwardChange
+        }}
+        professionalProps=
+        {{
+          handleOrganizationItem,
+          professionalItems: professionalSection.orgs,
+          handleOrgChange,
+          handleProfAddressChange,
+          handleRoleChange
+        }}
       />
       <Page info={info} sections={sections} />
     </>
