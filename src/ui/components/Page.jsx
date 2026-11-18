@@ -36,7 +36,7 @@ export default function Page({info, sections}) {
                   <SectionItem
                     category={section.category.toLowerCase()}
                     address={org.address}
-                    key={org.organizationName}
+                    key={org.id}
                     orgName={org.organizationName}
                     date={org.date}
                     accomplishments={org.accomplishments}
