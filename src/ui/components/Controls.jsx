@@ -15,14 +15,16 @@ export default function Controls({
     handleAddAwards, 
     handleSchoolChange, 
     handleAchievementChange, 
-    handleStartDateChange, 
+    handleStartDateChange, //can migrate this elsewhere, to avoid confusion
     handleEndDateChange, 
     handleAwardChange 
   } = educationProps;
   const {
     handleOrganizationItem,
     professionalItems,
-    handleOrgChange
+    handleOrgChange,
+    handleProfAddressChange,
+    handleRoleChange 
   } = professionalProps;
 
 
@@ -82,6 +84,10 @@ export default function Controls({
           onClick={handleOrganizationItem}
           professionalItems={professionalItems}
           handleOrgChange={handleOrgChange}
+          handleStartDateChange={handleStartDateChange}
+          handleEndDateChange={handleEndDateChange}
+          handleProfAddressChange ={handleProfAddressChange}
+          handleRoleChange={handleRoleChange}
         />
       </form>
     </div>
