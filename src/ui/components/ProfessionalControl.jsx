@@ -1,7 +1,14 @@
-import { useState } from "react";
-// import "../styles/ProfessionalControl.css";
+import "../styles/ProfessionalControl.css";
 
-function ProfessionalItem({ id, accomplishments, handleOrgChange }) {
+function ProfessionalItem({ 
+	id, 
+	accomplishments, 
+	handleOrgChange, 
+	handleStartDateChange,
+	handleEndDateChange,
+	handleProfAddressChange,
+	handleRoleChange 
+}) {
 
 	return (
 		<div key={id} className="professionalItem" id={id}>
@@ -16,37 +23,37 @@ function ProfessionalItem({ id, accomplishments, handleOrgChange }) {
 			</label>
 
 			<div className="address">
-				<label htmlFor={`city-${id}`}>
-					City: <input type="text" name={`city-${id}`} id={`city-${id}`} />
+				<label htmlFor="city">
+					City: <input onChange={handleProfAddressChange } type="text" name="city" />
 				</label>
-				<label htmlFor={`state-${id}`}>
-					State: <input type="text" name={`state-${id}`} id={`state-${id}`} />
+				<label htmlFor="state">
+					State: <input onChange={handleProfAddressChange } type="text" name="state" />
 				</label>
-				<label htmlFor={`country-${id}`}>
+				<label htmlFor="country">
 					Country: {" "}
-					<input type="text" name={`country-${id}`} id={`country-${id}`} />
+					<input onChange={handleProfAddressChange } type="text" name="country" />
 				</label>
 			</div>
 
 			<div className="date-picker">
 				<label htmlFor={`startDate-${id}`}>
 					Start Date: {" "}
-					<input type="text" name={`startDate-${id}`} id={`startDate-${id}`} />
+					<input onChange={handleStartDateChange} type="date" name={`startDate-${id}`} id={`startDate-${id}`} />
 				</label>
 				<label htmlFor={`endDate-${id}`}>
 					End Date: {" "}
-					<input type="text" name={`endDate-${id}`} id={`endDate-${id}`} />
-				</label>
+					<input onChange={handleEndDateChange} type="date" name={`endDate-${id}`} id={`endDate-${id}`} />
+				</label>	
 			</div>
 
 			<label htmlFor={`role-${id}`}>
-				Role: <input type="text" name={`role-${id}`} id={`role-${id}`} />
+				Role: <input onChange={handleRoleChange} type="text" name={`role-${id}`} id={`role-${id}`} />
 			</label>
 
 			<div className="accomplishments">
 				<div className="accomplishments__header">
 					<h3 className="accomplishments__heading">Accomplishments</h3>
-					<button onClick={""}>Add Accomplishment</button>
+					<button onClick={(e)=>e.preventDefault}>Add Accomplishment</button>
 				</div>
 
 				{accomplishments?.map((accomplishment, index) => (
@@ -64,7 +71,7 @@ function ProfessionalItem({ id, accomplishments, handleOrgChange }) {
 	);
 }
 
-function ProfessionalComponent({onClick, professionalItems, handleOrgChange}) {
+function ProfessionalComponent({onClick, professionalItems, handleOrgChange, handleStartDateChange, handleEndDateChange, handleProfAddressChange, handleRoleChange}) {
 
 	return (
 		<div className="professional-controls">
@@ -74,7 +81,15 @@ function ProfessionalComponent({onClick, professionalItems, handleOrgChange}) {
 			</div>
 
 			{professionalItems.map((item) => (
-				<ProfessionalItem id={item.id} key={item.id} handleOrgChange={handleOrgChange} />
+				<ProfessionalItem 
+					id={item.id} 
+					key={item.id} 
+					handleOrgChange={handleOrgChange} 
+					handleStartDateChange={handleStartDateChange}
+					handleEndDateChange={handleEndDateChange}
+					handleProfAddressChange={handleProfAddressChange}
+					handleRoleChange={handleRoleChange}
+				/>
 			))}
 		</div>
 	);
