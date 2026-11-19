@@ -11,7 +11,7 @@ export default function SectionItem({ educationalAchievement=null, role=null, ad
             :
             <>
               <h5 className={orgName ? "org-name" : "no-info"}>{orgName || "Your company"}</h5>
-              <h5 className={(address?.city && address.state && address.country) || "no-info" }>{ (address?.city || address.state || address.country) ? `${address?.city}, ${address?.state}, ${address?.country}` : "Your address"}</h5>
+              <h5 className={(address?.city && address.state && address.country) || "no-info" }>{ (address?.city || address.state || address.country) ? `${address?.city || "City"}, ${address?.state || "State"}, ${address?.country || "Country"}` : "City, State, Country"}</h5>
             </>
           }
         </div>
