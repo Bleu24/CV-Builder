@@ -1,7 +1,15 @@
-import { useState } from 'react';
 import '../styles/EducationControl.css';
 
-function EducationItem({ id, awards, onClick, handleSchoolChange, handleAchievementChange, handleStartDateChange, handleEndDateChange, handleAwardChange }) {
+function EducationItem({ 
+    id,
+    awards,
+    onClick, 
+    handleSchoolChange, 
+    handleAchievementChange, 
+    handleStartDateChange,
+    handleEndDateChange, 
+    handleAwardChange 
+}) {
     
 
     return (
