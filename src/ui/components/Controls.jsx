@@ -24,7 +24,9 @@ export default function Controls({
     professionalItems,
     handleOrgChange,
     handleProfAddressChange,
-    handleRoleChange 
+    handleRoleChange,
+    handleAddAccomplishments,
+    handleAccomplishmentChange 
   } = professionalProps;
 
 
@@ -88,6 +90,8 @@ export default function Controls({
           handleEndDateChange={handleEndDateChange}
           handleProfAddressChange ={handleProfAddressChange}
           handleRoleChange={handleRoleChange}
+          handleAddAccomplishments={handleAddAccomplishments}
+          handleAccomplishmentChange={handleAccomplishmentChange}
         />
       </form>
     </div>
