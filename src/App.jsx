@@ -261,6 +261,48 @@ function App() {
     setSections(nextSections);
   }
 
+  const handleAddAccomplishments = (e) => {
+    e.preventDefault();
+    const parentDiv = e.target.closest(".professionalItem");
+    const nextSections = sections.map(section => {
+      if (section.category === "Professional Experience") {
+        const nextOrgs = section.orgs.map(org => {
+          if (org.id === parentDiv.id) {
+            return { ...org, accomplishments: [...org.accomplishments, { id: crypto.randomUUID(), text: "" }] };
+          } else return org;
+        });
+
+        return { ...section, orgs: [...nextOrgs] };
+      } else return section;
+    });
+
+    setSections(nextSections);
+  }
+
+  const handleAccomplishmentChange = (e) => {
+    const parentDiv = e.target.closest(".professionalItem");
+    const input = e.target;
+    const nextSections = sections.map(section => {
+      if (section.category === "Professional Experience") {
+        const nextOrgs = section.orgs.map(org => {
+          if (org.id === parentDiv.id) {
+            const nextAccomplishments = org.accomplishments.map(accomplishment => {
+              if (accomplishment.id === input.id) {
+                return { ...accomplishment, text: e.target.value };
+              } else return accomplishment;
+            });
+
+            return { ...org, accomplishments: [...nextAccomplishments] };
+          } else return org;
+        });
+
+        return { ...section, orgs: [...nextOrgs] };
+      } else return section;
+    })
+
+    setSections(nextSections);
+  }
+
   return (
     <>
       <Controls
@@ -282,7 +324,9 @@ function App() {
           professionalItems: professionalSection.orgs,
           handleOrgChange,
           handleProfAddressChange,
-          handleRoleChange
+          handleRoleChange,
+          handleAddAccomplishments,
+          handleAccomplishmentChange
         }}
       />
       <Page info={info} sections={sections} />
