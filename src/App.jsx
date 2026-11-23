@@ -4,6 +4,7 @@ import Page from "./ui/components/Page";
 import { School } from "./classes/School";
 import { useState } from "react";
 import { Organization } from "./classes/Organization";
+import { save, load } from "./utils";
 
 function App() {
   const initialInfo = {
@@ -27,18 +28,33 @@ function App() {
     },
   ];
 
-  const [info, setInfo] = useState(initialInfo);
-  const [sections, setSections] = useState(initialSections);
+  const [info, setInfo] = useState(load("info") || initialInfo);
+  const [sections, setSections] = useState(load("sections") || initialSections);
   const [educationSection, professionalSection] = sections;
 
-  const handleFullNameChange = (e) =>
-    setInfo({ ...info, fullName: e.target.value });
-  const handleDegreeChange = (e) =>
-    setInfo({ ...info, degree: e.target.value });
-  const handleAddressChange = (e) =>
-    setInfo({ ...info, address: e.target.value });
-  const handleEmailChange = (e) =>
-    setInfo({ ...info, email: e.target.value });
+  const handleFullNameChange = (e) => {
+    const nextInfo = { ...info, fullName: e.target.value };
+    setInfo(nextInfo);
+    save(nextInfo, sections);
+  }
+
+  const handleDegreeChange = (e) => {
+    const nextInfo = { ...info, degree: e.target.value };
+    setInfo(nextInfo);
+    save(nextInfo, sections);
+  }
+
+  const handleAddressChange = (e) => {
+    const nextInfo = { ...info, address: e.target.value };
+    setInfo(nextInfo);
+    save(nextInfo, sections);
+  }
+
+  const handleEmailChange = (e) => {
+    const nextInfo = { ...info, email: e.target.value };
+    setInfo(nextInfo);
+    save(nextInfo, sections);
+  }
 
   const handleAddEducationItem = (e) => {
     e.preventDefault();
@@ -53,6 +69,7 @@ function App() {
     });
 
     setSections(nextSections);
+    save(info, nextSections);
   }
 
   const handleAddAwards = (e) => {
@@ -71,6 +88,7 @@ function App() {
     });
 
     setSections(nextSections);
+    save(info, nextSections);
   }
 
   const handleSchoolChange = (e) => {
@@ -88,6 +106,7 @@ function App() {
     })
 
     setSections(nextSections);
+    save(info, nextSections);
   }
 
   const handleAchievementChange = (e) => {
@@ -105,6 +124,7 @@ function App() {
     })
 
     setSections(nextSections);
+    save(info, nextSections);
   }
 
   const handleStartDateChange = (e) => {
@@ -131,6 +151,7 @@ function App() {
     });
 
     setSections(nextSections);
+    save(info, nextSections);
   }
 
   const handleEndDateChange = (e) => {
@@ -157,6 +178,7 @@ function App() {
     });
 
     setSections(nextSections);
+    save(info, nextSections);
   }
 
   const handleAwardChange = (e) => {
@@ -181,6 +203,7 @@ function App() {
     })
 
     setSections(nextSections);
+    save(info, nextSections);
   }
 
   const handleOrganizationItem = (e) => {
@@ -195,8 +218,8 @@ function App() {
       } else return section;
     });
 
-    console.log(professionalSection);
     setSections(nextSections);
+    save(info, nextSections);
   }
 
   const handleOrgChange = (e) => {
@@ -241,7 +264,7 @@ function App() {
     })
 
     setSections(nextSections);
-
+    save(info, nextSections);
   }
 
   const handleRoleChange = (e) => {
@@ -259,6 +282,7 @@ function App() {
     })
 
     setSections(nextSections);
+    save(info, nextSections);
   }
 
   const handleAddAccomplishments = (e) => {
@@ -277,6 +301,7 @@ function App() {
     });
 
     setSections(nextSections);
+    save(info, nextSections);
   }
 
   const handleAccomplishmentChange = (e) => {
@@ -301,6 +326,7 @@ function App() {
     })
 
     setSections(nextSections);
+    save(info, nextSections);
   }
 
   return (
