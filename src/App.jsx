@@ -329,6 +329,25 @@ function App() {
     save(info, nextSections);
   }
 
+  const handleDeleteItem = (e) => {
+    const parentDiv = e.target.closest(".educationItem") || e.target.closest(".professionalItem");
+    const nextSections = sections.map(section => {
+      if (section.category === "Education") {
+        const nextSchools = section.schools.filter(school => school.id !== parentDiv.id);
+
+        return { ...section, schools: [...nextSchools] };
+
+      } else if (section.category === "Professional Experience") {
+        const nextOrgs = section.orgs.filter(org => org.id !== parentDiv.id);
+
+        return { ...section, orgs: [...nextOrgs] };
+      }
+    });
+
+    setSections(nextSections);
+    save(info, nextSections);
+  }
+
   return (
     <>
       <Controls
@@ -340,8 +359,6 @@ function App() {
           handleAddAwards,
           handleSchoolChange,
           handleAchievementChange,
-          handleStartDateChange,
-          handleEndDateChange,
           handleAwardChange
         }}
         professionalProps=
@@ -353,6 +370,12 @@ function App() {
           handleRoleChange,
           handleAddAccomplishments,
           handleAccomplishmentChange
+        }}
+        genericProps=
+        {{
+          handleStartDateChange,
+          handleEndDateChange,
+          handleDeleteItem
         }}
       />
       <Page info={info} sections={sections} />
