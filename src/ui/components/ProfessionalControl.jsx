@@ -1,5 +1,3 @@
-import "../styles/ProfessionalControl.css";
-
 function ProfessionalItem({
 	id,
 	accomplishments,
@@ -9,11 +7,13 @@ function ProfessionalItem({
 	handleProfAddressChange,
 	handleRoleChange,
 	handleAddAccomplishments,
-	handleAccomplishmentChange
+	handleAccomplishmentChange,
+	handleDeleteItem
 }) {
 
 	return (
 		<div key={id} className="professionalItem" id={id}>
+			<button onClick={handleDeleteItem}>Delete</button>
 			<label htmlFor={`organizationName-${id}`}>
 				Organization Name: {" "}
 				<input
@@ -85,7 +85,8 @@ function ProfessionalComponent({
 	handleProfAddressChange, 
 	handleRoleChange, 
 	handleAddAccomplishments, 
-	handleAccomplishmentChange 
+	handleAccomplishmentChange,
+	handleDeleteItem 
 }) {
 
 	return (
@@ -107,6 +108,7 @@ function ProfessionalComponent({
 					handleRoleChange={handleRoleChange}
 					handleAddAccomplishments={handleAddAccomplishments}
 					handleAccomplishmentChange={handleAccomplishmentChange}
+					handleDeleteItem={handleDeleteItem}
 				/>
 			))}
 		</div>
