@@ -1,5 +1,3 @@
-import '../styles/EducationControl.css';
-
 function EducationItem({ 
     id,
     awards,
@@ -8,12 +6,14 @@ function EducationItem({
     handleAchievementChange, 
     handleStartDateChange,
     handleEndDateChange, 
-    handleAwardChange 
+    handleAwardChange,
+    handleDeleteItem 
 }) {
     
 
     return (
         <div className="educationItem" id={id} key={id}>
+            <button onClick={handleDeleteItem}>Delete</button>
             <label htmlFor={`schoolName-${id}`}>
                 School Name: {" "}
                 <input onChange={handleSchoolChange} type="text" name={`schoolName-${id}`} id={`schoolName-${id}`} />
@@ -55,7 +55,7 @@ function EducationItem({
     );
 }
 
-function EducationComponent({ onClick, educationItems, onAddAwardClick, handleSchoolChange, handleAchievementChange, handleStartDateChange, handleEndDateChange, handleAwardChange }) {
+function EducationComponent({ onClick, educationItems, onAddAwardClick, handleSchoolChange, handleAchievementChange, handleStartDateChange, handleEndDateChange, handleAwardChange, handleDeleteItem }) {
 
     return (
         <div className="education-controls">
@@ -75,6 +75,7 @@ function EducationComponent({ onClick, educationItems, onAddAwardClick, handleSc
                     handleStartDateChange={handleStartDateChange}
                     handleEndDateChange={handleEndDateChange}
                     handleAwardChange={handleAwardChange}
+                    handleDeleteItem={handleDeleteItem}
                 />
             )}
 
